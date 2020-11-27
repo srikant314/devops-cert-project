@@ -1,0 +1,31 @@
+---
+- hosts: app
+  become: true
+  become_user: root
+
+  tasks:
+  - name: Install Git on node
+    package:
+     name: git
+     state: present
+
+  - name: Install jdk on node
+    package:
+     name: default-jdk
+     state: present
+
+  - name: chromium browser Installation
+    package:
+     name: chromium-browser
+     state: present
+
+  - name: chromium-driver Installation
+    package:
+     name: chromium-chromedriver
+     state: present
+
+  - name: Copy the chrome-driver
+    copy:
+     src: "/usr/bin/chromedriver"
+     dest: /home/jenkins-slave/
+     remote_src: yes
