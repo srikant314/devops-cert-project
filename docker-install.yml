@@ -2,9 +2,6 @@
 - name: Install docker
   hosts: app
 
-  vars_files:
-    - secret
-
   become_method: su
   become_user: root
   become_flags: '-s /bin/sh'
