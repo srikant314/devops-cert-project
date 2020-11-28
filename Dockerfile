@@ -1,3 +1,3 @@
-FROM php:7.2-apache
-COPY website/ /var/www/html/
+FROM  devopsedu/webapp
+COPY php-website/ /var/www/html/
 EXPOSE 80
