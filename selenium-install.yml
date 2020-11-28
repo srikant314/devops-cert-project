@@ -19,7 +19,7 @@
   - name: Install required system packages
     become: true
     apt: name={{ item }} state=latest update_cache=yes
-    loop: [ 'xvfb', 'libgconf-2-4']
+    with_items: [ 'xvfb', 'libgconf-2-4']
 
   - name: Add Google Chrome Key
     become: true
