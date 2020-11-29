@@ -9,14 +9,14 @@ public class TestSite {
 
   public static void main(String[] args) {
     System.out.println("Hello!!!");
-    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+    System.setProperty("webdriver.chrome.driver", "/home/jenkins-slave/chrome-modules/chromedriver");
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.addArguments("--headless");
     chromeOptions.addArguments("--no-sandbox");
 
     WebDriver driver = new ChromeDriver(chromeOptions);
 
-    driver.get("http://192.168.56.106/content/about-us.php");
+    driver.get("http://34.68.99.165:8080/content/about-us.php");
 
     try {
       Thread.sleep(1000);
@@ -26,7 +26,7 @@ public class TestSite {
     }
     System.out.println("Page Source Output -> " + driver.getPageSource());
 
-    if (driver.getPageSource().contains("About Us")) {
+    if (driver.getPageSource().contains("about")) {
       System.out.println("Pass");
     } else {
       System.out.println("Fail");
