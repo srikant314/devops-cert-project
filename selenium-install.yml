@@ -34,7 +34,16 @@
   - name: Change Ownership and access of chromedriver
     become: true
     action: shell chown root:root /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver
-
+    
+ 
+ - name: Delete zipped files for selenium server and testng if present
+   file:
+     path: "{{ item }}"
+     state: absent
+   with_items:
+    - testng-6.8.7.jar.zip
+    - selenium-server-standalone-3.13.0.jar 
+    
 
   - name: Download Selenium JARs
-    action: shell rm -rf selenium-server-standalone-3.13.0.jar* && rm -rf testng-6.8.7.jar.zip* wget http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar && wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip && unzip -o testng-6.8.7.jar.zip
+    action: shell wget http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar && wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip && unzip -o testng-6.8.7.jar.zip
