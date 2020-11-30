@@ -6,15 +6,6 @@
   become_user: root
   become_flags: '-s /bin/sh'
 
-  tasks:
-  - name: Update APT package manager repositories cache
-    become: true
-    apt:
-      update_cache: no
-
-  - name: Install aptitude using apt
-    become: true
-    apt: name=aptitude state=latest update_cache=no force_apt_get=no
 
   - name: Install required system packages
     become: true
