@@ -1,6 +1,6 @@
 ---
 - name: Install Selenium
-  hosts: app
+  hosts: both
 
   become: true
 

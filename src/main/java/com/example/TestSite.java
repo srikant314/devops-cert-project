@@ -9,7 +9,7 @@ public class TestSite {
 
   public static void main(String[] args) {
     System.out.println("Hello!!!");
-    System.setProperty("webdriver.chrome.driver", "/home/jenkins-slave/chrome-modules/chromedriver");
+    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.addArguments("--headless");
     chromeOptions.addArguments("--no-sandbox");
