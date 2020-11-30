@@ -1,32 +1,26 @@
 ---
 - name: Install Selenium
-  hosts: Jenkins-Slave
+  hosts: app
 
   become_method: su
   become_user: root
   become_flags: '-s /bin/sh'
 
 
-  - name: Install required system packages
-    become: true
-    apt: name={{ item }} state=latest update_cache=no
-    with_items: [ 'xvfb', 'libgconf-2-4']
-
-  - name: Add Google Chrome Key
-    become: true
-    apt_key:
-      url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+  - name: Install Git
+    package:
+      name: git
       state: present
-
-  - name: Add Google Repo
-    become: true
-    apt_repository:
-      repo: deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main
+      
+  - name: Install jdk
+    package:
+      name: default-jdk
       state: present
-
-  - name: Update apt and install Google Chrome
-    become: true
-    apt: update_cache=no name=google-chrome-stable state=latest
+      
+  - name: Install chromium browser
+    package:
+      name: chromium-browser
+      state: present
 
   - name: Install Chrome Driver
     action: shell cd /home/suresh && mkdir -p chrome-modules && cd chrome-modules && wget http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip && unzip chromedriver_linux64.zip
