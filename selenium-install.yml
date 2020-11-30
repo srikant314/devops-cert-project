@@ -2,33 +2,39 @@
 - name: Install Selenium
   hosts: app
 
-  become_method: su
-  become_user: root
   become: true
-  become_flags: '-s /bin/sh'
 
   tasks:
-  - name: Install Git
+  - name: Install git
     package:
       name: git
       state: present
-      
+
   - name: Install jdk
     package:
       name: default-jdk
       state: present
-      
+
   - name: Install chromium browser
     package:
       name: chromium-browser
       state: present
 
   - name: Install Chrome Driver
-    action: shell cd /home/suresh && mkdir -p chrome-modules && cd chrome-modules && wget http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip && unzip chromedriver_linux64.zip
+    action: shell cd /home/jenkins-slave && mkdir -p chrome-modules && cd chrome-modules && wget http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip && unzip -o chromedriver_linux64.zip
 
-  - name: Update Chrome Driver Path
+  - name: Copy Chrome Driver
     become: true
-    action: shell mv chromedriver /usr/bin/chromedriver && chown root:root /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver
+    copy:
+     src: /home/jenkins-slave/chrome-modules/chromedriver
+     dest: /usr/bin/chromedriver
+     remote_src: yes
+
+
+  - name: Change Ownership and access of chromedriver
+    become: true
+    action: shell chown root:root /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver
+
 
   - name: Download Selenium JARs
     action: shell wget http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar && wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip && unzip testng-6.8.7.jar.zip
