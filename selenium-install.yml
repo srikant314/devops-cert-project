@@ -21,12 +21,12 @@
       state: present
 
   - name: Install Chrome Driver
-    action: shell cd /home/jenkins-slave && mkdir -p chrome-modules && cd chrome-modules && wget http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip && unzip -o chromedriver_linux64.zip
+    action: shell cd /home/{{ansible_hostname}} && mkdir -p chrome-modules && cd chrome-modules && wget http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip && unzip -o chromedriver_linux64.zip
 
   - name: Copy Chrome Driver
     become: true
     copy:
-     src: /home/jenkins-slave/chrome-modules/chromedriver
+     src: /home/{{ansible_hostname}}/chrome-modules/chromedriver
      dest: /usr/bin/chromedriver
      remote_src: yes
 
