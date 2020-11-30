@@ -44,6 +44,5 @@
      - testng-6.8.7.jar.zip
      - selenium-server-standalone-3.13.0.jar 
     
-
   - name: Download Selenium JARs
-    action: shell wget http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar && wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip && unzip -o testng-6.8.7.jar.zip
+    action: shell wget http://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar && wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip && unzip testng-6.8.7.jar.zip
